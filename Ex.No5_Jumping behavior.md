@@ -1,6 +1,6 @@
 # Ex.No: 5  Implementation of Jumping behavior 
-### DATE:                                                                            
-### REGISTER NUMBER : 
+### DATE:  23.08.25                                                                         
+### REGISTER NUMBER : 212221240022
 ### AIM: 
 To write a python program to simulate Jumbing behavior. 
 ### Algorithm:
@@ -16,19 +16,60 @@ To write a python program to simulate Jumbing behavior.
 10. land the player and display the player at every timestep
 11.  Stop the program
  ### Program:
+```
+import pygame
+pygame.init()
 
 
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Simple Jumping with Image")
 
 
+black = (0, 0, 0)
 
 
+sprite_image_filename = r"C:\Users\DELL\Desktop\12.webp"
+sprite = pygame.image.load(sprite_image_filename)
+sprite_width, sprite_height = sprite.get_size()
 
 
+player_x = 100
+player_y = height - sprite_height
+player_velocity = 5
+jump_power = -15
+gravity = 1
+is_jumping = False
+vertical_speed = 0
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        player_x -= player_velocity
+    if keys[pygame.K_RIGHT]:
+        player_x += player_velocity
+    if not is_jumping:
+        if keys[pygame.K_SPACE]:
+            is_jumping = True
+            vertical_speed = jump_power
+    if is_jumping:
+        player_y += vertical_speed
+        vertical_speed += gravity
+        if player_y >= height - sprite_height:
+            player_y = height - sprite_height
+            is_jumping = False
+    screen.fill(black)
+    screen.blit(sprite, (player_x, player_y))
+    pygame.display.flip()
+    pygame.time.delay(30)
 
-
-
+pygame.quit()
+```
 ### Output:
-
+![image](https://github.com/user-attachments/assets/0495474a-1df2-409c-9805-150f7b083f09)
 
 
 ### Result:
