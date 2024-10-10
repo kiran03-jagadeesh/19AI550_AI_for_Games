@@ -1,68 +1,75 @@
-# Ex.No: 7   Implementation of Alpha Beta Pruning 
-#### DATE: 01/10/24                                                                          
-#### REGISTER NUMBER : 212221240022 
-### AIM: 
-Write a Alpha beta pruning algorithm to find the optimal value of MAX Player from the given graph.
-### Steps:
+### Ex.No: 7 Implementation of Decision Tree Learning 
+### REGISTER NUMBER :212221230078
+### AIM:
+Design a decision tree for following data. 
+ Healthy, In Cover, With Ammo -> Attack
+Hurt, In Cover, With Ammo -> Attack
+Healthy, In Cover, Empty -> Defend
+Hurt, In Cover, Empty -> Defend
+Hurt, Exposed, With Ammo -> Defend
+### Algorithm:
 1. Start the program
-2. Initially  assign MAX and MIN value as 1000 and -1000.
-3.  Define the minimax function  using alpha beta pruning
-4.  If maximum depth is reached then return the score value of leaf node. [depth taken as 3]
-5.  In Max player turn, assign the alpha value by finding the maximum value by calling the minmax function recursively.
-6.  In Min player turn, assign beta value by finding the minimum value by calling the minmax function recursively.
-7.  Specify the score value of leaf nodes and Call the minimax function.
-8.  Print the best value of Max player.
-9.  Stop the program. 
-
-### Program:
-
-```python
-# Define a large negative and positive value to represent infinity
-INF = float('inf')
-
-# Alpha-Beta Pruning function
-def alpha_beta_pruning(depth, node_index, maximizing_player, values, alpha, beta):
-    # Base case: leaf node is reached
-    if depth == 3:
-        return values[node_index]
+2. import the necessary packages 
+3. Design a training data and test data 
+4. Create a decision tree classifier model
+5. Output the predictions 
+6. Visualize the decision tree
     
-    if maximizing_player:
-        max_eval = -INF
-        # Recur for the two children of the current node
-        for i in range(2):
-            eval = alpha_beta_pruning(depth + 1, node_index * 2 + i, False, values, alpha, beta)
-            max_eval = max(max_eval, eval)
-            alpha = max(alpha, eval)
-            
-            # Prune the branch
-            if beta <= alpha:
-                break
-        return max_eval
-    else:
-        min_eval = INF
-        # Recur for the two children of the current node
-        for i in range(2):
-            eval = alpha_beta_pruning(depth + 1, node_index * 2 + i, True, values, alpha, beta)
-            min_eval = min(min_eval, eval)
-            beta = min(beta, eval)
-            
-            # Prune the branch
-            if beta <= alpha:
-                break
-        return min_eval
+### Program:
+```
+class DecisionTree:
+    def __init__(self):
+        self.tree = {
+            "Healthy": {
+                "In Cover": {
+                    "With Ammo": "Attack",
+                    "Empty": "Defend"
+                },
+                "Exposed": {
+                    "With Ammo": "Defend",
+                    "Empty": "Defend"
+                }
+            },
+            "Hurt": {
+                "In Cover": {
+                    "With Ammo": "Attack",
+                    "Empty": "Defend"
+                },
+                "Exposed": {
+                    "With Ammo": "Defend",
+                    "Empty": "Defend"
+                }
+            }
+        }
 
-# Driver code
-if __name__ == "__main__":
-    # This is the terminal/leaf node values of the game tree
-    values = [3, 5, 6, 9, 1, 2, 0, -1]
+    def decide(self, health, cover, ammo):
+        return self.tree[health][cover][ammo]
 
-    print("Optimal value:", alpha_beta_pruning(0, 0, True, values, -INF, INF))
-````
+# Create a decision tree
+tree = DecisionTree()
+
+# Test the decision tree
+print(tree.decide("Healthy", "In Cover", "With Ammo"))  # Output: Attack
+print(tree.decide("Hurt", "In Cover", "With Ammo"))  # Output: Attack
+print(tree.decide("Healthy", "In Cover", "Empty"))  # Output: Defend
+print(tree.decide("Hurt", "In Cover", "Empty"))  # Output: Defend
+print(tree.decide("Hurt", "Exposed", "With Ammo"))  # Output: Defend
+
+# Assign the result to a variable
+result = tree.decide("Healthy", "In Cover", "With Ammo")
+print(result)  # Output: Attack
+
+# Use the result in a conditional statement
+if result == "Attack":
+    print("You attack!")
+elif result == "Defend":
+    print("You defend!")
+```
 
 ### Output:
-![op2](https://github.com/user-attachments/assets/d14633a0-8bec-46c0-952f-3558c98bd9a7)
 
+![Screenshot 2024-10-04 140300](https://github.com/user-attachments/assets/3f5c1b59-f1f1-4be0-bc44-e251615c00c5)
 
 
 ### Result:
-Thus the best score of max player was found using Alpha Beta Pruning.
+Thus the optimum value of max player was found using minimax search.
