@@ -1,5 +1,5 @@
 ### Ex.No: 7 Implementation of Decision Tree Learning 
-### REGISTER NUMBER :212221230078
+### REGISTER NUMBER :212221240022
 ### AIM:
 Design a decision tree for following data. 
  Healthy, In Cover, With Ammo -> Attack
