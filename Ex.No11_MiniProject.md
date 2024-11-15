@@ -98,5 +98,6 @@ pygame.quit()
 ### Output:
 A game window is created with a player character that can move left and right using the arrow keys. Pressing the spacebar plays a sound. The game continues running until the user quits by closing the window or pressing the escape key.
 
+
 ### Result:
 Thus, the simple game was implemented using Pygame.
